@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 
 import { Footer } from '@/layouts/Footer';
 import { Header } from '@/layouts/Header';
+import { cn } from '@/lib/utils';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,10 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className="h-full">
+      <body
+        className={cn(inter.className, 'h-full min-h-screen flex flex-col')}>
         <Header />
-        <section>{children}</section>
+        <main className="flex flex-1 flex-col">{children}</main>
         <Footer />
       </body>
     </html>
