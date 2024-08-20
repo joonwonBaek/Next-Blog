@@ -14,29 +14,54 @@ interface PostMatter {
   tags: string[];
 }
 
-interface Category {
-  public: string;
-  dir_path: string;
-}
-
 export interface Post extends PostMatter {
   url: string;
-  category: Category;
+  slug: string;
+  categoryPath: string;
+  categoryPublicName: string;
   mdx: MDXRemoteSerializeResult;
 }
 
+// target folder의 모든 mdx 파일 조회
+const getPostPaths = () => {
+  const postPaths: string[] = sync(`${POSTS_PATH}/**/*.mdx`);
+  return postPaths;
+};
+
 // mdx 파일 파싱
 const parsePost = async (postPath: string): Promise<Post> => {
-  const file = fs.readFileSync(postPath, 'utf-8');
-  const { data, content } = matter(file);
-  const grayMatter = data as PostMatter;
+  const postAbstract = parsePostAbstract(postPath);
+  const postDetail = await parsePostDetail(postPath);
+  return {
+    ...postAbstract,
+    ...postDetail,
+  };
+};
 
+const parsePostAbstract = (postPath: string) => {
   const filePath = postPath
     .slice(postPath.indexOf(BASE_PATH))
     .replace(`${BASE_PATH}/`, '')
     .replace('.mdx', '');
 
-  const [dir_path, slug] = filePath.split('/');
+  const [categoryPath, slug] = filePath.split('/');
+
+  const url = `blog/${categoryPath}/${slug}`;
+
+  const categoryPublicName = getCategoryPublicName(categoryPath);
+
+  return {
+    url,
+    categoryPath,
+    categoryPublicName,
+    slug,
+  };
+};
+
+const parsePostDetail = async (postPath: string) => {
+  const file = fs.readFileSync(postPath, 'utf-8');
+  const { data, content } = matter(file);
+  const grayMatter = data as PostMatter;
 
   const mdx = await serialize(content, {
     mdxOptions: {
@@ -46,37 +71,21 @@ const parsePost = async (postPath: string): Promise<Post> => {
     },
   });
 
-  const url = `blog/${dir_path}/${slug}`;
-
-  const publicCategory = dir_path
-    .split('_')
-    .map((token) => token[0].toUpperCase() + token.slice(1, token.length))
-    .join(' ');
-
-  const category: Category = {
-    public: publicCategory,
-    dir_path,
-  };
-
   return {
     ...grayMatter,
-    url,
-    category,
     mdx,
   };
 };
 
-// 타겟 폴더에 있는 모든 mdx 파일을 탐색하여 가져옵니다.
-export const getPostList = async (): Promise<Post[]> => {
-  const postPaths: string[] = sync(`${POSTS_PATH}/**/*.mdx`);
-  console.log(postPaths);
+const getCategoryPublicName = (dirPath: string) => {
+  return dirPath
+    .split('_')
+    .map((token) => token[0].toUpperCase() + token.slice(1, token.length))
+    .join(' ');
+};
 
-  const result = await Promise.all(
-    postPaths.map((postPath) => parsePost(postPath)),
-  );
-
-  // 가져온 mdx파일들을 front matter의 date를 기준으로 내림차순 정렬합니다.
-  return result.sort((a: Post, b: Post) => {
+const sortPostList = (PostList: Post[]) => {
+  return PostList.sort((a: Post, b: Post) => {
     const dateA = a.date;
     const dateB = b.date;
 
@@ -84,4 +93,23 @@ export const getPostList = async (): Promise<Post[]> => {
     if (dateA < dateB) return 1;
     return 0;
   });
+};
+
+// 타겟 폴더에 있는 모든 mdx 파일을 탐색하여 가져옵니다.
+export const getPostList = async (): Promise<Post[]> => {
+  const postPaths = getPostPaths();
+
+  const result = await Promise.all(
+    postPaths.map((postPath) => parsePost(postPath)),
+  );
+
+  return sortPostList(result);
+};
+
+export const getPostParamList = () => {
+  const postPaths: string[] = getPostPaths();
+  const abstactList = postPaths
+    .map((path) => parsePostAbstract(path))
+    .map((item) => ({ category: item.categoryPath, slug: item.slug }));
+  return abstactList;
 };
