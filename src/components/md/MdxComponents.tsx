@@ -3,7 +3,7 @@ import { MDXComponents } from 'mdx/types';
 
 import { MDXImage } from './MdxImage';
 
-export const mdxComponents: MDXComponents = {
+export const MdxComponents: MDXComponents = {
   // a: ({ children, ...props }) => {
   //   return (
   //     <Link {...props} href={props.href || ''}>

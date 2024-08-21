@@ -7,7 +7,7 @@ import remarkBreaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 import remarkToc from 'remark-toc';
 
-import { mdxComponents } from './MdxComponents';
+import { MdxComponents } from './MdxComponents';
 
 interface Props {
   children: string;
@@ -32,7 +32,7 @@ export const PostBody = ({ children }: Props) => {
           rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
         },
       }}
-      components={mdxComponents}
+      components={MdxComponents}
     />
   );
 };

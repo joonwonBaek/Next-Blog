@@ -46,6 +46,7 @@ URL에 특수 문자가 포함될 경우, 해당 문자는 URI 인코딩을 통�
 
 ```json
 http://www.example.com/file.txt
+http://www.example.com/images/photo.jpg
 ```
 
 ## UNIX 방식
@@ -83,3 +84,15 @@ http://www.example.com/file.txt
 ### 특수 기호
 
 - `.` (현재 디렉토리) 및 `..` (상위 디렉토리) 기호를 사용하여 상대 경로를 작성할 수 있습니다. 예를 들어, `..\Documents\file.txt`는 상위 디렉토리의 Documents 폴더를 가리킵니다.
+
+```JavaScript
+function getData() {
+	var tableData;
+	$.get('https://domain.com/products/1', function(response) {
+		tableData = response;
+	});
+	return tableData;
+}
+
+console.log(getData()); // undefined
+```
