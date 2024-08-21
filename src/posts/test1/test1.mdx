@@ -1,8 +1,85 @@
 ---
-title: 'test 제목'
-date: 2024-08-20
-desc: 테스트입니다
-thumbnail: /posts/nextjs_blog/setup/thumbnail.jpg
+title: FILE
+date: 2023-10-22T12:11:00
+tags: ['devops', 'nginx']
 ---
 
-test 입니다
+# 파일 Path 다루는 방식
+
+## File & Path
+
+- 볼륨 또는 드라이브 + 디렉터리 이름 + 선택적 파일 이름
+- 볼륨 구분 기호
+- 디렉터리 구분 문자 `/` `\`
+- 절대 경로와 상대 경로 `.` `..`
+- 경로 요소 구분 `:` `;`
+- UNC 경로
+- URL 과 URI
+
+## **파일 경로를 URL로 표시하는 방식**
+
+### 기본형식
+
+```json
+http://[도메인]/[파일경로]
+```
+
+### 로컬 파일
+
+`file://` 프로토콜을 사용
+
+```json
+file:///C:/Users/Username/Documents/file.txt
+```
+
+### 웹 서버에 있는 파일
+
+웹 서버에 호스팅된 파일의 경로는 도메인과 경로를 포함
+
+```json
+http://www.example.com/images/photo.jpg
+```
+
+### URI 인코딩
+
+URL에 특수 문자가 포함될 경우, 해당 문자는 URI 인코딩을 통해 안전하게 표현
+
+```json
+http://www.example.com/file.txt
+```
+
+## UNIX 방식
+
+### 구분자
+
+- UNIX는 슬래시(`/`)를 사용하여 디렉토리와 파일을 구분합니다. `/usr/local/bin/script.sh`에서 각 폴더는 슬래시로 구분됩니다.
+
+### 루트 디렉토리
+
+- UNIX 경로는 항상 루트 디렉토리(`/`)로 시작합니다. 모든 파일과 디렉토리는 이 루트에서 파생됩니다. `/home/username/documents/file.txt`는 홈 디렉토리 아래의 documents 폴더에 있는 파일을 나타냅니다.
+
+### 상대 경로
+
+- UNIX에서도 상대 경로를 사용할 수 있습니다. 현재 작업 디렉토리를 기준으로 경로를 지정할 수 있습니다. 현재 디렉토리가 `/home/username`이라면, `documents/file.txt`는 `/home/username/documents/file.txt`를 의미합니다.
+
+### 특수 기호
+
+- UNIX에서도 `.` (현재 디렉토리) 및 `..` (상위 디렉토리) 기호를 사용합니다. `../documents/file.txt`는 상위 디렉토리의 documents 폴더를 가리킵니다.
+
+## 윈도우즈 방식
+
+### 구분자
+
+- Windows는 백슬래시(`\`)를 사용하여 디렉토리와 파일을 구분합니다. 예를 들어, `C:\Program Files\MyApp\app.exe`에서 각 폴더는 백슬래시로 구분됩니다.
+
+### 드라이브 문자
+
+- Windows는 여러 드라이브를 지원하며, 각 드라이브는 문자로 표기됩니다.  `C:`는 C 드라이브를 의미합니다. 경로는 드라이브 문자를 포함하여 시작할 수 있습니다.
+
+### 상대 경로
+
+- 상대 경로는 현재 작업 디렉토리를 기준으로 합니다. 예를 들어, 현재 디렉토리가 `C:\Users\Username`이라면, `Documents\file.txt`는 `C:\Users\Username\Documents\file.txt`를 의미합니다.
+
+### 특수 기호
+
+- `.` (현재 디렉토리) 및 `..` (상위 디렉토리) 기호를 사용하여 상대 경로를 작성할 수 있습니다. 예를 들어, `..\Documents\file.txt`는 상위 디렉토리의 Documents 폴더를 가리킵니다.
