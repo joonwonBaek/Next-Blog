@@ -5,7 +5,6 @@ import path from 'path';
 
 const BASE_PATH = 'src\\posts';
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
-console.log(POSTS_PATH);
 
 interface PostMatter {
   title: string;
@@ -27,7 +26,7 @@ const getPostPaths = () => {
   return postPaths;
 };
 
-// mdx 파일 파싱
+// mdx 파일 parsing
 const parsePost = async (postPath: string): Promise<Post> => {
   const postAbstract = parsePostAbstract(postPath);
   const postDetail = await parsePostDetail(postPath);
@@ -43,15 +42,9 @@ const parsePostAbstract = (postPath: string) => {
     .replace(`${BASE_PATH}\\`, '') // BASE_PATH 뒤의 \를 제거
     .replace('.mdx', ''); // .mdx 확장자 제거
 
-  console.log(postPath);
-
-  console.log(`파일 경로 테스트 ${filePath}`);
-
-  // Windows 경로의 경우, \를 기준으로 split
   const [categoryPath, slug] = filePath.split('\\');
 
   const url = `blog/${categoryPath}/${slug}`;
-
   const categoryPublicName = getCategoryPublicName(categoryPath);
 
   return {
@@ -63,19 +56,18 @@ const parsePostAbstract = (postPath: string) => {
 };
 
 const parsePostDetail = async (postPath: string) => {
-  const file = fs.readFileSync(postPath, 'utf-8');
+  const file = fs.readFileSync(postPath, 'utf8');
   const { data, content } = matter(file);
   const grayMatter = data as PostMatter;
 
   return { ...grayMatter, content };
 };
 
-const getCategoryPublicName = (dirPath: string) => {
-  return dirPath
+const getCategoryPublicName = (dirPath: string) =>
+  dirPath
     .split('_')
     .map((token) => token[0].toUpperCase() + token.slice(1, token.length))
     .join(' ');
-};
 
 const sortPostList = (PostList: Post[]) => {
   return PostList.sort((a: Post, b: Post) => {
@@ -90,7 +82,7 @@ const sortPostList = (PostList: Post[]) => {
 
 // 타겟 폴더에 있는 모든 mdx 파일을 탐색하여 가져옵니다.
 export const getPostList = async (): Promise<Post[]> => {
-  const postPaths = getPostPaths();
+  const postPaths: string[] = getPostPaths();
 
   const result = await Promise.all(
     postPaths.map((postPath) => parsePost(postPath)),
@@ -101,10 +93,10 @@ export const getPostList = async (): Promise<Post[]> => {
 
 export const getPostParamList = () => {
   const postPaths: string[] = getPostPaths();
-  const abstactList = postPaths
+  const abstractList = postPaths
     .map((path) => parsePostAbstract(path))
     .map((item) => ({ category: item.categoryPath, slug: item.slug }));
-  return abstactList;
+  return abstractList;
 };
 
 export const getPostDetail = async (category: string, slug: string) => {

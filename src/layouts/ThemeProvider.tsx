@@ -4,5 +4,5 @@ import { ThemeProvider } from 'next-themes';
 import { PropsWithChildren } from 'react';
 
 export function Providers({ children }: PropsWithChildren) {
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return <ThemeProvider attribute="class">{children}</ThemeProvider>;
 }

@@ -1,0 +1,26 @@
+---
+title: file
+date: 2023-10-22T12:11:00
+tags: ['devops', 'nginx']
+---
+
+# 파일 Path 다루는 방식
+
+## File & Path
+
+- 볼륨 또는 드라이브 + 디렉터리 이름 + 선택적 파일 이름
+- 볼륨 구분 기호
+
+```javascript
+function getData() {
+  let tableData;
+  $.get('https://domain.com/products/1', function (response) {
+    tableData = response;
+  });
+  return tableData;
+}
+
+console.log(getData()); // undefined
+```
+
+1. **MDX 플러그인 설정**: Next.js에서 next-mdx-remote를 사용할 때 필요한 플러그인

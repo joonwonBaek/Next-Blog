@@ -21,15 +21,16 @@ export const PostBody = ({ children }: Props) => {
       options={{
         mdxOptions: {
           remarkPlugins: [
-            // 깃허브 Flavored 마크다운 지원 추가
+            // 깃허브 Flavored 마크다운 지원 추가 (version downgrade)
             remarkGfm,
             // 이모티콘 접근성 향상
             remarkA11yEmoji,
-            // 제목을 기반으로 목차를 생성
+            // 제목을 기반으로 목차를 생성합니다.
             remarkToc,
             remarkBreaks,
           ],
-          // 함께 작동하여 ID를 추가하고 제목을 연결
+          // 함께 작동하여 ID를 추가하고 제목을 연결합니다.
+          // @ts-ignore
           rehypePlugins: [rehypePrettyCode, rehypeSlug, rehypeAutolinkHeadings],
         },
       }}
