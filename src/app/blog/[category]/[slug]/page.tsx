@@ -1,5 +1,5 @@
-import { PostBody } from '@/components/md/PostBody';
-import { PostHeader } from '@/components/md/PostHeader';
+import { PostBody } from '@/components/mdx/PostBody';
+import { PostHeader } from '@/components/mdx/PostHeader';
 import { getPostDetail, getPostParamList } from '@/lib/post';
 
 type Props = {
@@ -21,7 +21,7 @@ const PostDetail = async ({ params }: Props) => {
   return (
     <div className="w-[800px] mx-auto">
       <PostHeader post={post} />
-      <div className="prose max-w-none">
+      <div className="prose max-w-none dark:prose-invert">
         <PostBody>{post.content}</PostBody>
       </div>
     </div>
