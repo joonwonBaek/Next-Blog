@@ -8,7 +8,7 @@ import remarkBreaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 import remarkToc from 'remark-toc';
 
-import { MdxComponents } from '.';
+import { MdxComponents } from '../mdx';
 
 interface Props {
   children: string;

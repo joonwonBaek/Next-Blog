@@ -1,5 +1,5 @@
-import { PostBody } from '@/components/mdx/PostBody';
-import { PostHeader } from '@/components/mdx/PostHeader';
+import { PostBody } from '@/components/post/PostBody';
+import { PostHeader } from '@/components/post/PostHeader';
 import { getPostDetail, getPostParamList } from '@/lib/post';
 
 type Props = {
