@@ -4,15 +4,15 @@ import ThemeSwitch from './ThemeChanger';
 
 export const Header = () => {
   return (
-    <header className="flex justify-center h-[60px] items-center">
+    <nav className="flex justify-center h-[64px] items-center sticky top-0 pt-1">
       <div className="w-full max-w-[1200px] flex justify-between px-4">
         <div>
-          <Link href="/blog">blog</Link>
+          <Link href="/blog">BAEK</Link>
         </div>
         <div>
           <ThemeSwitch />
         </div>
       </div>
-    </header>
+    </nav>
   );
 };
