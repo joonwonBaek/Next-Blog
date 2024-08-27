@@ -25,7 +25,7 @@ export interface Post extends PostMatter {
 // 모든 mdx 파일 조회
 const getPostPaths = (category?: string) => {
   const folder = category || '**';
-  const postPaths: string[] = sync(`${POSTS_PATH}\\${folder}\\**\\*.mdx`);
+  const postPaths: string[] = sync(`${POSTS_PATH}/${folder}/**/*.mdx`);
   return postPaths;
 };
 
@@ -92,6 +92,7 @@ const sortPostList = (PostList: Post[]) => {
 // 모든 포스트 목록 조회. 블로그 메인 페이지에서 사용
 export const getPostList = async (category?: string): Promise<Post[]> => {
   const postPaths: string[] = getPostPaths(category);
+  console.log(category, postPaths);
 
   const result = await Promise.all(
     postPaths.map((postPath) => parsePost(postPath)),
@@ -111,9 +112,9 @@ export const getPostParamList = () => {
 
 // category 목록 조회
 export const getCategoryList = () => {
-  const cgPaths: string[] = sync(`${POSTS_PATH}\\*`);
+  const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
   const cgList = cgPaths
-    .map((path) => path.split('\\').slice(-1)?.[0])
+    .map((path) => path.split('/').slice(-1)?.[0])
     .map((category) => ({ category }));
   return cgList;
 };
