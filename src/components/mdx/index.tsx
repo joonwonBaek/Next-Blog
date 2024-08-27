@@ -2,6 +2,7 @@
 import { MDXComponents } from 'mdx/types';
 
 import { Callout } from './Callout';
+import { Image } from './Image';
 
 export const MdxComponents: MDXComponents = {
   // a: ({ children, ...props }) => {
@@ -11,7 +12,7 @@ export const MdxComponents: MDXComponents = {
   //     </Link>
   //   );
   // },
-  // img: Image,
+  img: Image as any,
   blockquote: Callout,
   Callout,
 };
