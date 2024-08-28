@@ -71,7 +71,7 @@ const parsePostDetail = async (postPath: string) => {
 };
 
 // category folder name을 public name으로 변경 : dir_name -> Dir Name
-const getCategoryPublicName = (dirPath: string) =>
+export const getCategoryPublicName = (dirPath: string) =>
   dirPath
     .split('_')
     .map((token) => token[0].toUpperCase() + token.slice(1, token.length))
@@ -89,33 +89,36 @@ const sortPostList = (PostList: Post[]) => {
   });
 };
 
-// 모든 포스트 목록 조회. 블로그 메인 페이지에서 사용
-export const getPostList = async (category?: string): Promise<Post[]> => {
-  const postPaths: string[] = getPostPaths(category);
-  console.log(category, postPaths);
-
-  const result = await Promise.all(
-    postPaths.map((postPath) => parsePost(postPath)),
-  );
-
-  return sortPostList(result);
-};
-
 // 모든 category, slug 조합 조회. 접근 가능한 디테일 페이지 목록
 export const getPostParamList = () => {
   const postPaths: string[] = getPostPaths();
-  const abstractList = postPaths
+  const postParamList = postPaths
     .map((path) => parsePostAbstract(path))
     .map((item) => ({ category: item.categoryPath, slug: item.slug }));
-  return abstractList;
+  return postParamList;
+};
+
+// 모든 포스트 목록 조회. 블로그 메인 페이지에서 사용
+export const getPostList = async (category?: string): Promise<Post[]> => {
+  const postPaths: string[] = getPostPaths(category);
+  const postList = await Promise.all(postPaths.map((path) => parsePost(path)));
+
+  return sortPostList(postList);
 };
 
 // category 목록 조회
+export const getCategoryParamList = () => {
+  const categoryList = getCategoryList();
+  console.log(categoryList);
+
+  return categoryList.map((category) => ({ category }));
+};
+
 export const getCategoryList = () => {
   const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
-  const cgList = cgPaths
-    .map((path) => path.split('/').slice(-1)?.[0])
-    .map((category) => ({ category }));
+  const cgList = cgPaths.map((path) => path.split('\\').slice(-1)?.[0]);
+  console.log(cgList);
+
   return cgList;
 };
 
