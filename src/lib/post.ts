@@ -109,7 +109,6 @@ export const getPostList = async (category?: string): Promise<Post[]> => {
 // category 목록 조회
 export const getCategoryParamList = () => {
   const categoryList = getCategoryList();
-  console.log(categoryList);
 
   return categoryList.map((category) => ({ category }));
 };
@@ -117,7 +116,6 @@ export const getCategoryParamList = () => {
 export const getCategoryList = () => {
   const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
   const cgList = cgPaths.map((path) => path.split('\\').slice(-1)?.[0]);
-  console.log(cgList);
 
   return cgList;
 };

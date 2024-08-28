@@ -12,7 +12,6 @@ interface PostListProps {
 
 const PostListPage = async ({ category }: PostListProps) => {
   const postList = await getPostList(category);
-  console.log(postList);
 
   const categoryList = getCategoryList().map((dirName) => ({
     dirName,
