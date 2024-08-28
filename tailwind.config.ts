@@ -62,6 +62,26 @@ const config = {
             '.callout-contents > p': {
               margin: 0,
             },
+
+            // 인라인 코드 스타일링
+            ':not(pre) > code': {
+              position: 'relative',
+              bottom: 1,
+              color: '#64748b',
+              backgroundColor: '#f5f5f4',
+            },
+
+            '.dark :not(pre) > code': {
+              color: 'red',
+              backgroundColor: 'white',
+            },
+
+            'code::before': {
+              content: 'none',
+            },
+            'code::after': {
+              content: 'none',
+            },
           },
         },
       },
