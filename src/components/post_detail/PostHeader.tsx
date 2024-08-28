@@ -11,7 +11,7 @@ interface Props {
 export const PostHeader = ({ post }: Props) => {
   const date = dayjs(post.date).locale('ko').format('YYYY년 MM월 DD일');
   return (
-    <header>
+    <header className="text-center">
       <h1 className="text-center">{post.title}</h1>
       <div className="text-base">
         <Link href={`/blog/${post.categoryPath}`}>
