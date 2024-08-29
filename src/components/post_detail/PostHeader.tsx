@@ -14,7 +14,9 @@ export const PostHeader = ({ post }: Props) => {
     <header className="text-center">
       <h1 className="text-center">{post.title}</h1>
       <div className="text-base">
-        <Link href={`/blog/${post.categoryPath}`}>
+        <Link
+          href={`/blog/${post.categoryPath}`}
+          className="text-pink-600 no-underline hover:underline underline-offset-4 font-semibold">
           {post.categoryPublicName}
         </Link>
       </div>

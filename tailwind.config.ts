@@ -63,22 +63,19 @@ const config = {
               margin: 0,
             },
 
-            // 인라인 코드 스타일링
+            // 인라인 코드 스타일
             ':not(pre) > code': {
               fontWeight: 'inherit',
               position: 'relative',
               bottom: 1,
+              margin: '0 3px',
               color: '#eb5757',
               backgroundColor: 'rgba(135,131,120,0.15)',
-              fontFamily: 'Consolas, Menlo, Monaco, "Courier New", monospace',
+              fontFamily:
+                '"SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace',
               borderRadius: 3,
-              border: '1px solid #e0e0e0',
-              padding: '2px 5px',
-            },
-
-            '.dark :not(pre) > code': {
-              color: 'red',
-              backgroundColor: 'white',
+              // border: '1px solid #e0e0e0',
+              padding: '0.2em 0.4em',
             },
 
             'code::before': {
@@ -86,6 +83,22 @@ const config = {
             },
             'code::after': {
               content: 'none',
+            },
+            '[data-highlighted-line]': {
+              backgroundColor: 'rgba(253, 224, 71, 0.2)',
+            },
+            pre: {
+              paddingRight: 0,
+              paddingLeft: 0,
+            },
+            'pre > code > span': {
+              paddingLeft: '1rem',
+              paddingRight: '1rem',
+            },
+            u: {
+              textUnderlineOffset: '4px',
+              textDecorationThickness: 1,
+              fontWeight: 600,
             },
           },
         },
