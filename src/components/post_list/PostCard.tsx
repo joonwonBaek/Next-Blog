@@ -32,7 +32,7 @@ const PostCard = ({ post }: Props) => {
             <div className="text-sm lg:text-base text-blue-600 font-medium">
               {post.categoryPublicName}
             </div>
-            <h2 className="text-lg sm:text-xl md:text-lg lg:text-xl font-bold mb-3 mt-1 line-clamp-1">
+            <h2 className="text-lg sm:text-xl md:text-lg font-bold mb-3 mt-1 line-clamp-1">
               {post.title}
             </h2>
             <div className="flex gap-3 text-sm text-gray-500 dark:text-gray-400 justify-between">
