@@ -22,7 +22,7 @@ const PostDetail = async ({ params }: Props) => {
   return (
     <>
       <ScrollProgressBar />
-      <div className="w-[800px] mx-auto prose max-w-none dark:prose-invert">
+      <div className="max-w-[850px] px-4 w-full mx-auto prose dark:prose-invert">
         <PostHeader post={post} />
         <PostBody>{post.content}</PostBody>
       </div>

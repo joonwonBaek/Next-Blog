@@ -1,11 +1,10 @@
-import Link from 'next/link';
-
 import {
   getCategoryList,
   getCategoryPublicName,
   getPostList,
 } from '@/lib/post';
 
+import { CategoryButton } from './CategoryButton';
 import PostCard from './PostCard';
 
 interface PostListProps {
@@ -24,23 +23,22 @@ const PostListPage = async ({ category }: PostListProps) => {
     <section className="max-w-[1200px] w-full mx-auto px-4 mt-14">
       <section className="mb-10">
         <ul className="flex gap-3">
-          <li>
-            <Link href="/blog" className={!category ? 'text-red-500' : ''}>
-              All
-            </Link>
-          </li>
+          <CategoryButton
+            href="/blog"
+            isCurrent={!category}
+            displayName="All"
+          />
           {categoryList.map((cg) => (
-            <li key={cg.dirName}>
-              <Link
-                href={`/blog/${cg.dirName}`}
-                className={cg.dirName === category ? 'text-red-500' : ''}>
-                {cg.publicName}
-              </Link>
-            </li>
+            <CategoryButton
+              key={cg.dirName}
+              href={`/blog/${cg.dirName}`}
+              displayName={cg.publicName}
+              isCurrent={cg.dirName === category}
+            />
           ))}
         </ul>
       </section>
-      <section className="w-[1000px] mx-auto">
+      <section>
         <ul className="grid md:grid-cols-2 grid-cols-1 lg:gap-12 gap-8">
           {postList.map((post) => (
             <PostCard key={post.url + post.date} post={post} />
