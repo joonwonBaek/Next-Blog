@@ -11,7 +11,7 @@ export const ExternalLink = ({
       {...props}
       target="_blanck"
       href={href.toString() || ''}
-      className="text-pink-600 transition no-underline hover:underline underline-offset-4 duration-75">
+      className="text-pink-600 no-underline hover:underline underline-offset-4">
       {children}
     </a>
   );

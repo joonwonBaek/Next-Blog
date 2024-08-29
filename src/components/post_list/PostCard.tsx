@@ -20,7 +20,9 @@ const PostCard = ({ post }: Props) => {
           <Image
             src={post.thumbnail}
             alt={`thumbnamil for ${post.title}`}
+            sizes="(max-width: 1000px) 50vw, 450px"
             fill
+            priority
             className="rounded-md"
             style={{ objectFit: 'contain' }}
           />
