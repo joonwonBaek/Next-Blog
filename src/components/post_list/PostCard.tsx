@@ -15,7 +15,7 @@ const PostCard = ({ post }: Props) => {
 
   return (
     <Link href={post.url}>
-      <li className="border rounded-md p-3 flex flex-col gap-3">
+      <li className="flex flex-col gap-3">
         <div className="w-full aspect-video border rounded-md relative">
           <Image
             src={post.thumbnail}
