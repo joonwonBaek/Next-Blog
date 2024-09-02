@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import fs from 'fs';
 import { sync } from 'glob';
 import matter from 'gray-matter';
@@ -10,6 +11,7 @@ const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
 interface PostMatter {
   title: string;
   date: Date;
+  dateString: string;
   thumbnail: string;
 }
 
@@ -17,9 +19,9 @@ export interface Post extends PostMatter {
   url: string;
   slug: string;
   categoryPath: string;
-  categoryPublicName: string;
   content: string;
   readingMinutes: number;
+  categoryPublicName: string;
 }
 
 // 모든 mdx 파일 조회
@@ -66,8 +68,11 @@ const parsePostDetail = async (postPath: string) => {
   const { data, content } = matter(file);
   const grayMatter = data as PostMatter;
   const readingMinutes = Math.ceil(readingTime(content).minutes);
+  const dateString = dayjs(grayMatter.date)
+    .locale('ko')
+    .format('YYYY년 MM월 DD일');
 
-  return { ...grayMatter, content, readingMinutes };
+  return { ...grayMatter, dateString, content, readingMinutes };
 };
 
 // category folder name을 public name으로 변경 : dir_name -> Dir Name
@@ -88,15 +93,6 @@ const sortPostList = (PostList: Post[]) => {
     return 0;
   });
 };
-
-// 모든 category, slug 조합 조회. 접근 가능한 디테일 페이지 목록
-// export const getPostParamList = () => {
-//   const postPaths: string[] = getPostPaths();
-//   const postParamList = postPaths
-//     .map((path) => parsePostAbstract(path))
-//     .map((item) => ({ category: item.categoryPath, slug: item.slug }));
-//   return postParamList;
-// };
 
 // 모든 포스트 목록 조회. 블로그 메인 페이지에서 사용
 export const getPostList = async (category?: string): Promise<Post[]> => {
@@ -122,6 +118,11 @@ export const getCategoryList = () => {
   const cgList = cgPaths.map((path) => path.split('\\').slice(-1)?.[0]);
 
   return cgList;
+};
+
+export const getCategoryDetailList = async () => {
+  const postList = await getPostList();
+  console.log(postList);
 };
 
 // post 상세 페이지 내용 조회

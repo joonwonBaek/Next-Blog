@@ -1,4 +1,5 @@
 import {
+  getCategoryDetailList,
   getCategoryList,
   getCategoryPublicName,
   getSortedPostList,
@@ -18,6 +19,7 @@ const PostListPage = async ({ category }: PostListProps) => {
     dirName,
     publicName: getCategoryPublicName(dirName),
   }));
+  getCategoryDetailList();
 
   return (
     <section className="max-w-[950px] w-full mx-auto px-4 mt-14">
