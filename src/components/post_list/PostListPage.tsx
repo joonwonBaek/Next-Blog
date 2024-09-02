@@ -1,7 +1,7 @@
 import {
   getCategoryList,
   getCategoryPublicName,
-  getPostList,
+  getSortedPostList,
 } from '@/lib/post';
 
 import { CategoryButton } from './CategoryButton';
@@ -12,7 +12,7 @@ interface PostListProps {
 }
 
 const PostListPage = async ({ category }: PostListProps) => {
-  const postList = await getPostList(category);
+  const postList = await getSortedPostList(category);
 
   const categoryList = getCategoryList().map((dirName) => ({
     dirName,
