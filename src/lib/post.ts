@@ -24,6 +24,12 @@ export interface Post extends PostMatter {
   categoryPublicName: string;
 }
 
+export interface CategoryDetail {
+  dirName: string;
+  publicName: string;
+  count: number;
+}
+
 // 모든 mdx 파일 조회
 export const getPostPaths = (category?: string) => {
   const folder = category || '**';
@@ -113,6 +119,10 @@ export const getCategoryParamList = () => {
   return categoryList.map((category) => ({ category }));
 };
 
+export const getAllPostCount = async () => {
+  return (await getPostList()).length;
+};
+
 export const getCategoryList = () => {
   const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
   const cgList = cgPaths.map((path) => path.split('\\').slice(-1)?.[0]);
@@ -122,7 +132,23 @@ export const getCategoryList = () => {
 
 export const getCategoryDetailList = async () => {
   const postList = await getPostList();
-  console.log(postList);
+  const result: { [key: string]: number } = {};
+  for (const post of postList) {
+    const category = post.categoryPath;
+    if (result[category]) {
+      result[category] += 1;
+    } else {
+      result[category] = 1;
+    }
+  }
+  const detailList: CategoryDetail[] = Object.entries(result).map(
+    ([category, count]) => ({
+      dirName: category,
+      publicName: getCategoryPublicName(category),
+      count,
+    }),
+  );
+  return detailList;
 };
 
 // post 상세 페이지 내용 조회

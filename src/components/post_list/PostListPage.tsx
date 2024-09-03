@@ -1,7 +1,6 @@
 import {
+  getAllPostCount,
   getCategoryDetailList,
-  getCategoryList,
-  getCategoryPublicName,
   getSortedPostList,
 } from '@/lib/post';
 
@@ -14,12 +13,8 @@ interface PostListProps {
 
 const PostListPage = async ({ category }: PostListProps) => {
   const postList = await getSortedPostList(category);
-
-  const categoryList = getCategoryList().map((dirName) => ({
-    dirName,
-    publicName: getCategoryPublicName(dirName),
-  }));
-  getCategoryDetailList();
+  const categoryList = await getCategoryDetailList();
+  const allPostCount = await getAllPostCount();
 
   return (
     <section className="max-w-[950px] w-full mx-auto px-4 mt-14">
@@ -29,6 +24,7 @@ const PostListPage = async ({ category }: PostListProps) => {
             href="/blog"
             isCurrent={!category}
             displayName="All"
+            count={allPostCount}
           />
           {categoryList.map((cg) => (
             <CategoryButton
@@ -36,6 +32,7 @@ const PostListPage = async ({ category }: PostListProps) => {
               href={`/blog/${cg.dirName}`}
               displayName={cg.publicName}
               isCurrent={cg.dirName === category}
+              count={cg.count}
             />
           ))}
         </ul>
