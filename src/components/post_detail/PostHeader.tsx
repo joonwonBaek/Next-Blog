@@ -9,9 +9,9 @@ interface Props {
 
 export const PostHeader = ({ post }: Props) => {
   return (
-    <header className="text-center">
-      <h1 className="text-center">{post.title}</h1>
-      <div className="text-base">
+    <header className="text-center mt-14">
+      <h1 className="mb-5 text-3xl">{post.title}</h1>
+      <div className="text-base mb-3">
         <Link
           href={`/blog/${post.categoryPath}`}
           className="text-blue-600 no-underline hover:underline underline-offset-4 font-semibold">
