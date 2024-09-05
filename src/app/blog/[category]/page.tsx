@@ -5,7 +5,7 @@ type Props = {
   params: { category: string };
 };
 // 허용된 param 외 접근시 404
-export const dynamic = false;
+export const dynamicParams = false;
 
 export const generateStaticParams = () => {
   const categoryList = getCategoryList();
