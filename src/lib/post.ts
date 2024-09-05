@@ -5,7 +5,7 @@ import matter from 'gray-matter';
 import path from 'path';
 import readingTime from 'reading-time';
 
-const BASE_PATH = 'src\\posts';
+const BASE_PATH = '/src/posts';
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
 
 interface PostMatter {
@@ -52,10 +52,10 @@ const parsePost = async (postPath: string): Promise<Post> => {
 export const parsePostAbstract = (postPath: string) => {
   const filePath = postPath
     .slice(postPath.indexOf(BASE_PATH))
-    .replace(`${BASE_PATH}\\`, '') // BASE_PATH 뒤의 \를 제거
+    .replace(`${BASE_PATH}/`, '') // BASE_PATH 뒤의 \를 제거
     .replace('.mdx', ''); // .mdx 확장자 제거
 
-  const [categoryPath, slug] = filePath.split('\\');
+  const [categoryPath, slug] = filePath.split('/');
 
   const url = `/blog/${categoryPath}/${slug}`;
   const categoryPublicName = getCategoryPublicName(categoryPath);
@@ -112,6 +112,7 @@ export const getSortedPostList = async (category?: string) => {
   const postList = await getPostList(category);
   return sortPostList(postList);
 };
+
 // category 목록 조회
 export const getCategoryParamList = () => {
   const categoryList = getCategoryList();
@@ -125,7 +126,7 @@ export const getAllPostCount = async () => {
 
 export const getCategoryList = () => {
   const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
-  const cgList = cgPaths.map((path) => path.split('\\').slice(-1)?.[0]);
+  const cgList = cgPaths.map((path) => path.split('/').slice(-1)?.[0]);
 
   return cgList;
 };
@@ -153,7 +154,7 @@ export const getCategoryDetailList = async () => {
 
 // post 상세 페이지 내용 조회
 export const getPostDetail = async (category: string, slug: string) => {
-  const filePath = `${POSTS_PATH}\\${category}\\${slug}\\content.mdx`;
+  const filePath = `${POSTS_PATH}/${category}/${slug}/content.mdx`;
   const detail = await parsePost(filePath);
   return detail;
 };
