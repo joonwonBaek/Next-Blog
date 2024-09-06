@@ -1,6 +1,7 @@
 import Giscus from '@/components/Giscus';
 import { PostBody } from '@/components/post_detail/PostBody';
 import { PostHeader } from '@/components/post_detail/PostHeader';
+import TableOfContent from '@/components/TableOfContent';
 import ScrollProgressBar from '@/layouts/ScrollProgressBar';
 import { getPostDetail, getPostPaths, parsePostAbstract } from '@/lib/post';
 
@@ -28,7 +29,10 @@ const PostDetail = async ({ params }: Props) => {
       <ScrollProgressBar />
       <div className="max-w-[750px] px-4 w-full mx-auto prose dark:prose-invert">
         <PostHeader post={post} />
-        <PostBody>{post.content}</PostBody>
+        <article className="relative">
+          <TableOfContent post={post} />
+          <PostBody post={post} />
+        </article>
         <hr />
         <Giscus />
       </div>

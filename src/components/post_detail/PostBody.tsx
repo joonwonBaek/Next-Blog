@@ -8,16 +8,18 @@ import remarkBreaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 import remarkToc from 'remark-toc';
 
+import { Post } from '@/config/types';
+
 import { MdxComponents } from '../mdx';
 
 interface Props {
-  children: string;
+  post: Post;
 }
 
-export const PostBody = ({ children }: Props) => {
+export const PostBody = ({ post }: Props) => {
   return (
     <MDXRemote
-      source={children}
+      source={post.content}
       options={{
         mdxOptions: {
           remarkPlugins: [
