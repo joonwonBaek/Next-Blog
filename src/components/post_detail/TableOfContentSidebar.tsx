@@ -2,7 +2,7 @@ import { HeadingItem } from '@/config/types';
 import { cn } from '@/lib/utils';
 
 import CopyLinkButton from '../common/CopyLinkButton';
-import { ScrollToComment, ScrollTop } from './TocButtons';
+import { ScrollToComment, ScrollTop } from '../common/TocButtons';
 
 interface Props {
   toc: HeadingItem[];
