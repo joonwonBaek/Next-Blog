@@ -2,13 +2,12 @@
 
 import Link from 'next/link';
 
-import { useSpy } from '@/hook/useSpy';
+import { useSpyElem } from '@/hook/useSpy';
 
 import ThemeSwitch from './theme/Switch';
 
 export const Header = () => {
-  const height = 63;
-  const { ref, marginTop } = useSpy(height);
+  const { ref, marginTop } = useSpyElem(64);
   return (
     <nav
       style={{ marginTop }}
