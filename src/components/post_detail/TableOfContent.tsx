@@ -2,7 +2,7 @@ import { Post } from '@/config/types';
 import { parseToc } from '@/lib/post';
 import { cn } from '@/lib/utils';
 
-import { Button } from '../ui/button';
+import { ScrollToComment, ScrollTop } from './TocButtons';
 
 interface Props {
   post: Post;
@@ -28,10 +28,9 @@ const TableOfContent = ({ post }: Props) => {
             ))}
           </ul>
         </div>
-        <div>
-          <Button variant="outline" size="sm">
-            cc
-          </Button>
+        <div className="flex gap-2">
+          <ScrollTop />
+          <ScrollToComment />
         </div>
       </div>
     </aside>
