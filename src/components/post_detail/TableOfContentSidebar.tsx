@@ -1,29 +1,24 @@
-import { Post } from '@/config/types';
-import { parseToc } from '@/lib/post';
+import { HeadingItem } from '@/config/types';
 import { cn } from '@/lib/utils';
 
 import CopyLinkButton from '../common/CopyLinkButton';
 import { ScrollToComment, ScrollTop } from './TocButtons';
 
 interface Props {
-  post: Post;
+  toc: HeadingItem[];
 }
 
-const TableOfContent = ({ post }: Props) => {
-  const toc = parseToc(post.content);
+const TableOfContentSidebar = ({ toc }: Props) => {
   return (
-    <aside className="absolute -top-[100px] left-full h-full not-prose">
-      <div className="sticky z-10  top-[100px] mt-[100px] ml-[5rem]">
+    <aside className="absolute -top-[100px] left-full h-[calc(100%+150px)] -mb-[100px] not-prose hidden xl:block">
+      <div className="sticky z-10  top-[100px] w-[200px] bottom-0 mt-[100px] ml-[5rem]">
         <div className="px-4 py-2 border-l mb-4">
-          <div className="font-bold mb-1">on this page</div>
+          <div className="font-bold mb-1">On this page</div>
           <ul className="text-xs">
             {toc.map((item) => (
               <li
                 key={item.link}
-                className={cn(
-                  item.indent === 1 && 'ml-4',
-                  'py-1 whitespace-nowrap',
-                )}>
+                className={cn(item.indent === 1 && 'ml-4', 'py-1')}>
                 {item.text}
               </li>
             ))}
@@ -39,4 +34,4 @@ const TableOfContent = ({ post }: Props) => {
   );
 };
 
-export default TableOfContent;
+export default TableOfContentSidebar;

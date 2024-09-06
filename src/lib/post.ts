@@ -143,13 +143,15 @@ export const parseToc = (content: string): HeadingItem[] => {
   return (
     content.match(regex)?.map((heading: string) => ({
       text: heading.replace('#', '').replace('#', '>').replace('#', '>'),
-      link: heading
-        .replace('#', '')
-        .replace('#', '')
-        .replace('#', '')
-        .replace(/ /g, '-')
-        .toLowerCase()
-        .replace('?', ''),
+      link:
+        '#' +
+        heading
+          .replace('# ', '')
+          .replace('#', '')
+          .replace(/[\[\]:!@#$%^&*()+=]/g, '')
+          .replace(/ /g, '-')
+          .toLowerCase()
+          .replace('?', ''),
       indent: heading.match(/#/g)?.length || 0,
     })) || []
   );
