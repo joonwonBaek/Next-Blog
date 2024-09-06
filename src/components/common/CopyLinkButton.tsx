@@ -1,24 +1,54 @@
 'use client';
 
-import { Check, Link } from 'lucide-react';
+import { Check, Link, XCircle } from 'lucide-react';
+import { useState } from 'react';
+
+import useWatchTimeout from '@/hook/useWatchTimeout';
 
 import { Button } from '../ui/button';
 import { useToast } from '../ui/useToast';
 
 const CopyLinkButton = () => {
   const { toast } = useToast();
+  const [copied, setCopied] = useState(false);
 
-  const ToastTitle = (
+  useWatchTimeout(copied, 3000, () => {
+    setCopied(false);
+  });
+
+  const SuccessToastTitle = (
     <div className="flex items-center gap-3">
       <Check size={16} /> Successfully Copied
     </div>
   );
 
-  const copyToast = () => toast({ title: ToastTitle });
+  const successToast = () => toast({ title: SuccessToastTitle });
+
+  const FailToastTile = (
+    <div className="flex items-center gap-3">
+      <XCircle size={16} /> Copy Failed
+    </div>
+  );
+
+  const failToast = () =>
+    toast({ title: FailToastTile, variant: 'destructive' });
+
+  const handleCopy = async () => {
+    const url = window.location.href;
+
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      successToast();
+    } catch (e) {
+      console.error(e);
+      failToast();
+    }
+  };
 
   return (
-    <Button variant="outline" size="icon" onClick={copyToast}>
-      <Link size={16} />
+    <Button variant="outline" size="icon" onClick={handleCopy}>
+      {copied ? <Check size={16} /> : <Link size={16} />}
     </Button>
   );
 };
