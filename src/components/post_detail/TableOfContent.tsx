@@ -2,6 +2,7 @@ import { Post } from '@/config/types';
 import { parseToc } from '@/lib/post';
 import { cn } from '@/lib/utils';
 
+import CopyLinkButton from '../common/CopyLinkButton';
 import { ScrollToComment, ScrollTop } from './TocButtons';
 
 interface Props {
@@ -31,6 +32,7 @@ const TableOfContent = ({ post }: Props) => {
         <div className="flex gap-2">
           <ScrollTop />
           <ScrollToComment />
+          <CopyLinkButton />
         </div>
       </div>
     </aside>
