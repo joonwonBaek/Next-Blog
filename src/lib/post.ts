@@ -101,7 +101,7 @@ export const getCategoryParamList = () => {
 
 export const getSitemapPostList = async () => {
   const postList = await getPostList();
-  const baseUrl = 'https://next-blog-azure-xi.vercel.app/blog';
+  const baseUrl = 'https://next-blog-azure-xi.vercel.app';
   const sitemapPostList = postList.map(({ url }) => ({
     lastModified: new Date(),
     url: `${baseUrl}${url}`,
