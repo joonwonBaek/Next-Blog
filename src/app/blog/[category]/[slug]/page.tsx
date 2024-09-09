@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import FloatingButton from '@/components/common/FloatingButton';
 import Giscus from '@/components/post_detail/Giscus';
 import { PostBody } from '@/components/post_detail/PostBody';
@@ -17,6 +19,35 @@ type Props = {
 
 // 허용된 param 외 접근시 404
 export const dynamicParams = false;
+
+const baseDomain = 'https://next-blog-azure-xi.vercel.app';
+
+export async function generateMetadata({
+  params: { category, slug },
+}: Props): Promise<Metadata> {
+  const post = await getPostDetail(category, slug);
+
+  const title = `${post.title} | BAEK`;
+  const imageURL = `${baseDomain}${post.thumbnail}`;
+
+  return {
+    title,
+    description: post.desc,
+
+    openGraph: {
+      title,
+      description: post.desc,
+      url: `${baseDomain}${post.url}`,
+      siteName: 'BAEK BLOG',
+      type: 'website',
+      images: [imageURL],
+    },
+    // twitter: {
+    //   card: 'summary_large_image',
+    //   title
+    // },
+  };
+}
 
 export const generateStaticParams = () => {
   const postPaths: string[] = getPostPaths();
