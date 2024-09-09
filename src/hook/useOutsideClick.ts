@@ -13,7 +13,7 @@ export const useOutsideClick = <T extends HTMLElement>(
     const listener = (e: ClickEvent) => {
       const target = e.target as Node;
       if (!ref.current || ref.current.contains(target)) return;
-      setTimeout(() => handler(e), 10);
+      setTimeout(() => handler(e), 100);
     };
 
     document.addEventListener('mousedown', listener);
