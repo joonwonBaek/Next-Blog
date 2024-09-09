@@ -8,7 +8,12 @@ import useWatchTimeout from '@/hook/useWatchTimeout';
 import { Button } from '../ui/button';
 import { useToast } from '../ui/useToast';
 
-const CopyLinkButton = () => {
+interface ButtonProps {
+  size?: number;
+  className?: string;
+}
+
+const CopyLinkButton = ({ size = 16, className }: ButtonProps) => {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
 
@@ -47,8 +52,12 @@ const CopyLinkButton = () => {
   };
 
   return (
-    <Button variant="outline" size="icon" onClick={handleCopy}>
-      {copied ? <Check size={16} /> : <Link size={16} />}
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={handleCopy}
+      className={className}>
+      {copied ? <Check size={size} /> : <Link size={size} />}
     </Button>
   );
 };

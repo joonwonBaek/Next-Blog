@@ -1,3 +1,4 @@
+import FloatingButton from '@/components/common/FloatingButton';
 import Giscus from '@/components/post_detail/Giscus';
 import { PostBody } from '@/components/post_detail/PostBody';
 import { PostHeader } from '@/components/post_detail/PostHeader';
@@ -41,6 +42,7 @@ const PostDetail = async ({ params }: Props) => {
         </article>
         <hr />
         <Giscus />
+        <FloatingButton />
       </div>
     </>
   );
