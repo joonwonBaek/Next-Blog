@@ -6,6 +6,7 @@ import { PostBody } from '@/components/post_detail/PostBody';
 import { PostHeader } from '@/components/post_detail/PostHeader';
 import TableOfContentSidebar from '@/components/post_detail/TableOfContentSidebar';
 import TableOfContentTop from '@/components/post_detail/TableOfContentTop';
+import { baseDomain } from '@/config/const';
 import {
   getPostDetail,
   getPostPaths,
@@ -19,8 +20,6 @@ type Props = {
 
 // 허용된 param 외 접근시 404
 export const dynamicParams = false;
-
-const baseDomain = 'https://next-blog-azure-xi.vercel.app';
 
 export async function generateMetadata({
   params: { category, slug },
@@ -38,14 +37,13 @@ export async function generateMetadata({
       title,
       description: post.desc,
       url: `${baseDomain}${post.url}`,
-      siteName: 'BAEK BLOG',
-      type: 'website',
       images: [imageURL],
     },
-    // twitter: {
-    //   card: 'summary_large_image',
-    //   title
-    // },
+    twitter: {
+      title,
+      description: post.desc,
+      images: [imageURL],
+    },
   };
 }
 
