@@ -1,9 +1,12 @@
+import { Metadata } from 'next';
+
+import FloatingButton from '@/components/common/FloatingButton';
 import Giscus from '@/components/post_detail/Giscus';
 import { PostBody } from '@/components/post_detail/PostBody';
 import { PostHeader } from '@/components/post_detail/PostHeader';
 import TableOfContentSidebar from '@/components/post_detail/TableOfContentSidebar';
 import TableOfContentTop from '@/components/post_detail/TableOfContentTop';
-import ScrollProgressBar from '@/layouts/ScrollProgressBar';
+import { baseDomain } from '@/config/const';
 import {
   getPostDetail,
   getPostPaths,
@@ -17,6 +20,32 @@ type Props = {
 
 // 허용된 param 외 접근시 404
 export const dynamicParams = false;
+
+export async function generateMetadata({
+  params: { category, slug },
+}: Props): Promise<Metadata> {
+  const post = await getPostDetail(category, slug);
+
+  const title = `${post.title} | BAEK`;
+  const imageURL = `${baseDomain}${post.thumbnail}`;
+
+  return {
+    title,
+    description: post.desc,
+
+    openGraph: {
+      title,
+      description: post.desc,
+      url: `${baseDomain}${post.url}`,
+      images: [imageURL],
+    },
+    twitter: {
+      title,
+      description: post.desc,
+      images: [imageURL],
+    },
+  };
+}
 
 export const generateStaticParams = () => {
   const postPaths: string[] = getPostPaths();
@@ -33,7 +62,6 @@ const PostDetail = async ({ params }: Props) => {
 
   return (
     <>
-      <ScrollProgressBar />
       <div className="max-w-[750px] px-4 w-full mx-auto prose dark:prose-invert">
         <PostHeader post={post} />
         <TableOfContentTop toc={toc} />
@@ -43,6 +71,7 @@ const PostDetail = async ({ params }: Props) => {
         </article>
         <hr />
         <Giscus />
+        <FloatingButton />
       </div>
     </>
   );
