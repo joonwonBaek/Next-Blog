@@ -7,7 +7,7 @@ import readingTime from 'reading-time';
 
 import { CategoryDetail, HeadingItem, Post, PostMatter } from '@/config/types';
 
-const BASE_PATH = 'src\\posts';
+const BASE_PATH = '/src/posts';
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
 
 // 모든 mdx 파일 조회
