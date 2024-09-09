@@ -5,30 +5,10 @@ import matter from 'gray-matter';
 import path from 'path';
 import readingTime from 'reading-time';
 
-const BASE_PATH = '/src/posts';
+import { CategoryDetail, HeadingItem, Post, PostMatter } from '@/config/types';
+
+const BASE_PATH = 'src\\posts';
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
-
-interface PostMatter {
-  title: string;
-  date: Date;
-  dateString: string;
-  thumbnail: string;
-}
-
-export interface Post extends PostMatter {
-  url: string;
-  slug: string;
-  categoryPath: string;
-  content: string;
-  readingMinutes: number;
-  categoryPublicName: string;
-}
-
-export interface CategoryDetail {
-  dirName: string;
-  publicName: string;
-  count: number;
-}
 
 // 모든 mdx 파일 조회
 export const getPostPaths = (category?: string) => {
@@ -157,4 +137,23 @@ export const getPostDetail = async (category: string, slug: string) => {
   const filePath = `${POSTS_PATH}/${category}/${slug}/content.mdx`;
   const detail = await parsePost(filePath);
   return detail;
+};
+
+export const parseToc = (content: string): HeadingItem[] => {
+  const regex = /^(#|##|###) (.*$)/gim;
+  return (
+    content.match(regex)?.map((heading: string) => ({
+      text: heading.replace('#', '').replace('#', '>').replace('#', '>'),
+      link:
+        '#' +
+        heading
+          .replace('# ', '')
+          .replace('#', '')
+          .replace(/[\[\]:!@#$%^&*()+=]/g, '')
+          .replace(/ /g, '-')
+          .toLowerCase()
+          .replace('?', ''),
+      indent: heading.match(/#/g)?.length || 0,
+    })) || []
+  );
 };
