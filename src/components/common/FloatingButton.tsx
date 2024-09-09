@@ -3,6 +3,7 @@
 import { Bolt } from 'lucide-react';
 import { useState } from 'react';
 
+import { useOutsideClick } from '@/hook/useOutsideClick';
 import { cn } from '@/lib/utils';
 
 import { Button } from '../ui/button';
@@ -12,6 +13,9 @@ import { ScrollToComment, ScrollTop } from './TocButtons';
 const FloatingButton = () => {
   const [visible, setVisible] = useState(false);
   const toggleVisible = () => setVisible((prev) => !prev);
+  const handleOutsideClick = () => setVisible(false);
+
+  const buttonRef = useOutsideClick<HTMLButtonElement>(handleOutsideClick);
 
   return (
     <div className="group fixed bottom-6 right-6 xl:hidden">
@@ -20,6 +24,7 @@ const FloatingButton = () => {
           size="icon"
           variant={visible ? 'default' : 'outline'}
           onClick={toggleVisible}
+          ref={buttonRef}
           className={cn('absolute bottom-0 right-0 z-10 transition')}>
           <Bolt size={22} />
         </Button>
