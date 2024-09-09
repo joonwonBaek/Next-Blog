@@ -3,7 +3,6 @@ import { PostBody } from '@/components/post_detail/PostBody';
 import { PostHeader } from '@/components/post_detail/PostHeader';
 import TableOfContentSidebar from '@/components/post_detail/TableOfContentSidebar';
 import TableOfContentTop from '@/components/post_detail/TableOfContentTop';
-import ScrollProgressBar from '@/layouts/ScrollProgressBar';
 import {
   getPostDetail,
   getPostPaths,
@@ -33,7 +32,6 @@ const PostDetail = async ({ params }: Props) => {
 
   return (
     <>
-      <ScrollProgressBar />
       <div className="max-w-[750px] px-4 w-full mx-auto prose dark:prose-invert">
         <PostHeader post={post} />
         <TableOfContentTop toc={toc} />
