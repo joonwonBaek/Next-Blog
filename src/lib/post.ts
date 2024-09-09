@@ -99,6 +99,16 @@ export const getCategoryParamList = () => {
   return categoryList.map((category) => ({ category }));
 };
 
+export const getSitemapPostList = async () => {
+  const postList = await getPostList();
+  const baseUrl = 'https://next-blog-azure-xi.vercel.app/blog';
+  const sitemapPostList = postList.map(({ url }) => ({
+    lastModified: new Date(),
+    url: `${baseUrl}${url}`,
+  }));
+  return sitemapPostList;
+};
+
 export const getAllPostCount = async () => {
   return (await getPostList()).length;
 };
