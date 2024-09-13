@@ -59,7 +59,7 @@ const config = {
       typography: {
         DEFAULT: {
           css: {
-            'h2, h3': {
+            'h2, h3, h4': {
               'scroll-margin-top': '5rem',
             },
             '.callout-contents > p': {

@@ -15,6 +15,7 @@ interface Props {
 
 const TableOfContentSidebar = ({ toc }: Props) => {
   const activeIdList = useHeadingObserver('h2, h3');
+
   return (
     <aside className="absolute -top-[200px] left-full h-[calc(100%+150px)] -mb-[100px] not-prose hidden xl:block">
       <div className="sticky z-10 top-[200px] w-[200px] bottom-0 mt-[200px] ml-[5rem]">
@@ -32,7 +33,7 @@ const TableOfContentSidebar = ({ toc }: Props) => {
                     isIntersecting && 'font-medium text-blue-600',
                     'py-1 transition',
                   )}>
-                  <Link href={item.link}>{item.link}</Link>
+                  <Link href={item.link}>{item.text}</Link>
                 </li>
               );
             })}
