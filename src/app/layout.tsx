@@ -34,7 +34,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full scroll-smooth" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="h-full scroll-my-20 scroll-smooth"
+      suppressHydrationWarning>
       <body className={cn(inter.className, 'min-h-screen flex flex-col')}>
         <ThemeProvider>
           <Header />
