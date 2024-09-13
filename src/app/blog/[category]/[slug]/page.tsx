@@ -55,6 +55,7 @@ export const generateStaticParams = () => {
   return paramList;
 };
 
+// 한국어 인코딩 추가
 const PostDetail = async ({ params }: Props) => {
   const { category, slug } = params;
   const post = await getPostDetail(category, slug);
