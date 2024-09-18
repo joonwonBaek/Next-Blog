@@ -1,7 +1,7 @@
 import '@/config/globals.css';
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import { Toaster } from '@/components/ui/toaster';
 import { baseDomain, blogDesc, blogName } from '@/config/const';
@@ -10,7 +10,11 @@ import { Header } from '@/layouts/Header';
 import { Providers as ThemeProvider } from '@/layouts/theme/Provider';
 import { cn } from '@/lib/utils';
 
-const inter = Inter({ subsets: ['latin'] });
+const pretendard = localFont({
+  src: '../fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '45 920',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseDomain),
@@ -34,8 +38,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full scroll-smooth" suppressHydrationWarning>
-      <body className={cn(inter.className, 'min-h-screen flex flex-col')}>
+    <html
+      lang="ko"
+      className="h-full scroll-my-20 scroll-smooth"
+      suppressHydrationWarning>
+      <body className={cn(pretendard.className, 'min-h-screen flex flex-col')}>
         <ThemeProvider>
           <Header />
           <main className="mt-[64px] flex flex-1 flex-col">{children}</main>

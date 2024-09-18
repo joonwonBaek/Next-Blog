@@ -16,6 +16,7 @@ export const generateStaticParams = () => {
   return paramList;
 };
 
+// 한국어 인코딩 추가
 export async function generateMetadata({
   params: { category },
 }: Props): Promise<Metadata> {

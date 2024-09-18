@@ -150,20 +150,21 @@ export const getPostDetail = async (category: string, slug: string) => {
 };
 
 export const parseToc = (content: string): HeadingItem[] => {
-  const regex = /^(#|##|###) (.*$)/gim;
+  const regex = /^(##|###) (.*$)/gim;
+  const headingList = content.match(regex);
   return (
-    content.match(regex)?.map((heading: string) => ({
-      text: heading.replace('#', '').replace('#', '>').replace('#', '>'),
+    headingList?.map((heading: string) => ({
+      text: heading.replace('##', '').replace('#', ''),
       link:
         '#' +
         heading
           .replace('# ', '')
           .replace('#', '')
-          .replace(/[\[\]:!@#$%^&*()+=]/g, '')
+          .replace(/[\[\]:!@#$%^&*()+=,.]/g, '')
           .replace(/ /g, '-')
           .toLowerCase()
           .replace('?', ''),
-      indent: heading.match(/#/g)?.length || 0,
+      indent: (heading.match(/#/g)?.length || 2) - 2,
     })) || []
   );
 };
