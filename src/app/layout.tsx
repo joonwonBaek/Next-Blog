@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: blogName,
   description: blogDesc,
   icons: {
-    icon: '/icon2.png',
+    icon: '/icon.png',
   },
   openGraph: {
     title: blogName,
