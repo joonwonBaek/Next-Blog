@@ -31,9 +31,19 @@ export const PostBody = ({ post }: Props) => {
             remarkToc,
             remarkBreaks,
           ],
-          // 함께 작동하여 ID를 추가하고 제목을 연결합니다.
-          // @ts-ignore
-          rehypePlugins: [rehypePrettyCode, rehypeSlug, rehypeAutolinkHeadings],
+          rehypePlugins: [
+            // pretty code block
+            [
+              // @ts-ignore
+              rehypePrettyCode,
+              {
+                theme: { dark: 'github-dark-dimmed', light: 'github-light' },
+              },
+            ],
+            // ID를 추가하고 제목을 연결합니다.
+            rehypeSlug,
+            rehypeAutolinkHeadings,
+          ],
         },
       }}
       components={MdxComponents}
