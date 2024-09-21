@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(baseDomain),
   title: blogName,
   description: blogDesc,
+  icons: {
+    icon: '/icon.png',
+  },
   openGraph: {
     title: blogName,
     siteName: blogName,
