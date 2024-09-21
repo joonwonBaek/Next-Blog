@@ -1,7 +1,6 @@
 // @ts-expect-error no types
 import remarkA11yEmoji from '@fec/remark-a11y-emoji';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkBreaks from 'remark-breaks';
@@ -31,9 +30,18 @@ export const PostBody = ({ post }: Props) => {
             remarkToc,
             remarkBreaks,
           ],
-          // 함께 작동하여 ID를 추가하고 제목을 연결합니다.
-          // @ts-ignore
-          rehypePlugins: [rehypePrettyCode, rehypeSlug, rehypeAutolinkHeadings],
+          rehypePlugins: [
+            // pretty code block
+            [
+              // @ts-ignore
+              rehypePrettyCode,
+              {
+                theme: { dark: 'github-dark-dimmed', light: 'github-light' },
+              },
+            ],
+            // ID를 추가하고 제목을 연결합니다.
+            rehypeSlug,
+          ],
         },
       }}
       components={MdxComponents}

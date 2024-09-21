@@ -1,8 +1,10 @@
 'use client';
 
+import { Github } from 'lucide-react';
 import Link from 'next/link';
 
 import ScrollProgressBar from '@/components/common/ScrollProgressBar';
+import { Button } from '@/components/ui/button';
 import { useSpyElem } from '@/hook/useSpy';
 
 import ThemeSwitch from './theme/Switch';
@@ -18,8 +20,13 @@ export const Header = () => {
         <div className="flex items-center text-lg font-medium">
           <Link href="/blog">BAEK</Link>
         </div>
-        <div>
+        <div className="flex gap-3">
           <ThemeSwitch />
+          <Button asChild variant="ghost" size="icon">
+            <Link href="https://github.com/joonwonBaek" target="_blank">
+              <Github className="size-[1.2rem]" />
+            </Link>
+          </Button>
         </div>
       </div>
       <ScrollProgressBar />

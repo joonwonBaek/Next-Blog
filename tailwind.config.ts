@@ -60,7 +60,7 @@ const config = {
         DEFAULT: {
           css: {
             'h2, h3, h4': {
-              'scroll-margin-top': '5rem',
+              scrollMarginTop: '5rem',
             },
             '.callout-contents > p': {
               margin: 0,
@@ -77,8 +77,8 @@ const config = {
               fontFamily:
                 '"SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace',
               borderRadius: 3,
-              // border: '1px solid #e0e0e0',
               padding: '0.2em 0.4em',
+              overflowWrap: 'break-word',
             },
 
             'code::before': {
@@ -87,17 +87,37 @@ const config = {
             'code::after': {
               content: 'none',
             },
-            '[data-highlighted-line]': {
-              backgroundColor: 'rgba(253, 224, 71, 0.2)',
-            },
+
             pre: {
               paddingRight: 0,
               paddingLeft: 0,
+              color: 'var(--shiki-light)',
+              backgroundColor: 'var(--shiki-light-bg)',
+              border: '1px solid #e5e7eb',
             },
+
+            '.dark pre': {
+              backgroundColor: 'var(--shiki-dark-bg)',
+              color: 'var(--shiki-dark)',
+              border: '1px solid #374151',
+            },
+
             'pre > code > span': {
               paddingLeft: '1rem',
               paddingRight: '1rem',
             },
+
+            'pre code span': {
+              color: 'var(--shiki-light)',
+            },
+            '.dark pre code span': {
+              color: 'var(--shiki-dark)',
+            },
+
+            '[data-highlighted-line]': {
+              backgroundColor: 'rgba(253, 224, 71, 0.2)',
+            },
+
             u: {
               textUnderlineOffset: '4px',
               textDecorationThickness: 1,
@@ -127,11 +147,7 @@ const config = {
       },
     },
   },
-  plugins: [
-    require('tailwindcss-animate'),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp'),
-  ],
+  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
 } satisfies Config;
 
 export default config;

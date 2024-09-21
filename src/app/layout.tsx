@@ -7,7 +7,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { baseDomain, blogDesc, blogName } from '@/config/const';
 import { Footer } from '@/layouts/Footer';
 import { Header } from '@/layouts/Header';
-import { Providers as ThemeProvider } from '@/layouts/theme/Provider';
+import { ThemeProvider } from '@/layouts/theme/Provider';
 import { cn } from '@/lib/utils';
 
 const pretendard = localFont({
