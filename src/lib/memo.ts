@@ -37,7 +37,7 @@ export const parseMemoAbstract = (memoPath: string) => {
 
   const [categoryPath, slug] = filePath.split('\\');
 
-  const url = `/memos/${categoryPath}/${slug}`;
+  const url = `/memo/${categoryPath}/${slug}`;
   const categoryPublicName = getCategoryPublicName(categoryPath);
 
   return {
