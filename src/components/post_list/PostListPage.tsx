@@ -22,6 +22,7 @@ const PostListPage = async ({ category }: PostListProps) => {
         allPostCount={allPostCount}
         categoryList={categoryList}
         currentCategory={category}
+        currentSection="blog"
       />
       <section>
         <ul className="grid md:grid-cols-2 grid-cols-1 lg:gap-12 gap-8">

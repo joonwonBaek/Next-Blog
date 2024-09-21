@@ -17,20 +17,22 @@ interface CategoryListProps {
   categoryList: CategoryDetail[];
   allPostCount: number;
   currentCategory?: string;
+  currentSection?: string;
 }
 
 const CategoryList = ({
   categoryList,
   allPostCount,
   currentCategory = 'all',
+  currentSection = 'blog',
 }: CategoryListProps) => {
   const router = useRouter();
 
   const onCategoryChange = (value: string) => {
     if (value === 'all') {
-      router.push('/blog');
+      router.push(`/${currentSection}`);
     } else {
-      router.push(`/blog/${value}`);
+      router.push(`/${currentSection}/${value}`);
     }
   };
 
@@ -39,7 +41,7 @@ const CategoryList = ({
       <section className="mb-10 hidden sm:block">
         <ul className="flex gap-3">
           <CategoryButton
-            href="/blog"
+            href={`/${currentSection}`}
             isCurrent={currentCategory === 'all'}
             displayName="All"
             count={allPostCount}
@@ -47,7 +49,7 @@ const CategoryList = ({
           {categoryList.map((cg) => (
             <CategoryButton
               key={cg.dirName}
-              href={`/blog/${cg.dirName}`}
+              href={`/${currentSection}/${cg.dirName}`}
               displayName={cg.publicName}
               isCurrent={cg.dirName === currentCategory}
               count={cg.count}
