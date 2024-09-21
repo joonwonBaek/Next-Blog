@@ -57,7 +57,7 @@ const Giscus = () => {
     );
     iframe?.contentWindow?.postMessage(
       { giscus: { setConfig: { theme } } },
-      'https//giscus.app',
+      'https://giscus.app',
     );
   }, [theme]);
 
