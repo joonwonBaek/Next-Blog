@@ -20,6 +20,11 @@ import { useEffect, useRef } from 'react';
   crossorigin="anonymous"
   async></script>; */
 }
+
+const repoName = process.env.NEXT_PUBLIC_GISCUS_REPO_NAME || '';
+const repoId = process.env.NEXT_PUBLIC_GISCUS_REPO_ID || '';
+const categoryId = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || '';
+
 const Giscus = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
@@ -35,10 +40,10 @@ const Giscus = () => {
     scriptElement.async = true;
     scriptElement.crossOrigin = 'anonymous';
 
-    scriptElement.setAttribute('data-repo', 'joonwonBaek/Next-Blog');
-    scriptElement.setAttribute('data-repo-id', 'R_kgDOMluWrg');
+    scriptElement.setAttribute('data-repo', repoName);
+    scriptElement.setAttribute('data-repo-id', repoId);
     scriptElement.setAttribute('data-category', 'Comments');
-    scriptElement.setAttribute('data-category-id', 'DIC_kwDOMluWrs4CiN1z');
+    scriptElement.setAttribute('data-category-id', categoryId);
     scriptElement.setAttribute('data-mapping', 'pathname');
     scriptElement.setAttribute('data-strict', '0');
     scriptElement.setAttribute('data-reactions-enabled', '1');
