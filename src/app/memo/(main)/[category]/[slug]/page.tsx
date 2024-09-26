@@ -63,7 +63,7 @@ const MemoDetail = async ({ params }: Props) => {
 
   return (
     <>
-      <div className="max-w-[750px] px-4 w-full mx-auto prose dark:prose-invert">
+      <div className="max-w-[750px] px-5 w-full mx-auto prose dark:prose-invert sm:px-6">
         <PostHeader post={memo} />
         <TableOfContentTop toc={toc} />
         <article className="relative">
