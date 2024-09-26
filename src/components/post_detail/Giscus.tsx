@@ -3,24 +3,6 @@
 import { useTheme } from 'next-themes';
 import { useEffect, useRef } from 'react';
 
-{
-  /* <script
-  src="https://giscus.app/client.js"
-  data-repo="joonwonBaek/Next-Blog"
-  data-repo-id="R_kgDOMluWrg"
-  data-category="Comments"
-  data-category-id="DIC_kwDOMluWrs4CiN1z"
-  data-mapping="pathname"
-  data-strict="0"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="bottom"
-  data-theme="preferred_color_scheme"
-  data-lang="ko"
-  crossorigin="anonymous"
-  async></script>; */
-}
-
 const repoName = process.env.NEXT_PUBLIC_GISCUS_REPO_NAME || '';
 const repoId = process.env.NEXT_PUBLIC_GISCUS_REPO_ID || '';
 const categoryId = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || '';
