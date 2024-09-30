@@ -8,7 +8,7 @@ import readingTime from 'reading-time';
 import { baseDomain } from '@/config/const';
 import { CategoryDetail, HeadingItem, Post, PostMatter } from '@/config/types';
 
-const BASE_PATH = '/src/posts';
+const BASE_PATH = 'src\\posts';
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
 
 // 모든 mdx 파일 조회
@@ -33,10 +33,10 @@ const parsePost = async (postPath: string): Promise<Post> => {
 export const parsePostAbstract = (postPath: string) => {
   const filePath = postPath
     .slice(postPath.indexOf(BASE_PATH))
-    .replace(`${BASE_PATH}/`, '') // BASE_PATH 뒤의 \를 제거
+    .replace(`${BASE_PATH}\\`, '') // BASE_PATH 뒤의 \를 제거
     .replace('.mdx', ''); // .mdx 확장자 제거
 
-  const [categoryPath, slug] = filePath.split('/');
+  const [categoryPath, slug] = filePath.split('\\');
 
   const url = `/blog/${categoryPath}/${slug}`;
   const categoryPublicName = getCategoryPublicName(categoryPath);
@@ -110,7 +110,7 @@ export const getAllPostCount = async () => {
 
 export const getCategoryList = () => {
   const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
-  const cgList = cgPaths.map((path) => path.split('/').slice(-1)?.[0]);
+  const cgList = cgPaths.map((path) => path.split('\\').slice(-1)?.[0]);
 
   return cgList;
 };
@@ -138,7 +138,7 @@ export const getCategoryDetailList = async () => {
 
 // post 상세 페이지 내용 조회
 export const getPostDetail = async (category: string, slug: string) => {
-  const filePath = `${POSTS_PATH}/${category}/${slug}/content.mdx`;
+  const filePath = `${POSTS_PATH}\\${category}\\${slug}\\content.mdx`;
   const detail = await parsePost(filePath);
   return detail;
 };
