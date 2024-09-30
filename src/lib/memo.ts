@@ -5,6 +5,7 @@ import matter from 'gray-matter';
 import path from 'path';
 import readingTime from 'reading-time';
 
+import { baseDomain } from '@/config/const';
 import { CategoryDetail, HeadingItem, Post, PostMatter } from '@/config/types';
 
 const BASE_PATH = 'src/memos';
@@ -95,7 +96,7 @@ export const getCategoryParamList = () => {
 
 export const getSitemapMemoList = async () => {
   const memoList = await getMemoList();
-  const baseUrl = 'https://next-blog-azure-xi.vercel.app';
+  const baseUrl = baseDomain;
   const sitemapMemoList = memoList.map(({ url }) => ({
     lastModified: new Date(),
     url: `${baseUrl}${url}`,
