@@ -16,6 +16,7 @@ const pretendard = localFont({
   weight: '45 920',
 });
 
+//<meta name="google-site-verification" content="wutb3c0M_zQd-K6GI5XNq0lRHOgPRkZ2Ou3aPK8JSHA" />
 export const metadata: Metadata = {
   metadataBase: new URL(baseDomain),
   title: blogName,
@@ -25,8 +26,12 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: blogName,
+    description: blogDesc,
     siteName: blogName,
     type: 'website',
+  },
+  verification: {
+    google: 'wutb3c0M_zQd-K6GI5XNq0lRHOgPRkZ2Ou3aPK8JSHA',
   },
   twitter: {
     card: 'summary_large_image',
