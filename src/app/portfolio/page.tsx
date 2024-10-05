@@ -20,24 +20,24 @@ export const metadata: Metadata = {
 
 const PortfolioPage = () => {
   return (
-    <main className="container relative mx-auto scroll-my-12 overflow-auto p-6 sm:p-9 md:p-16 print:p-12">
-      <section className="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex-1 space-y-1.5">
-            <h1 className="text-3xl font-bold">{RESUME_DATA.name}</h1>
-            <p className="max-w-md text-pretty font-mono text-sm text-muted-foreground print:text-[12px]">
+    <main className="container relative mx-auto scroll-my-12 overflow-auto p-6 pt-12 sm:p-9 md:p-16 print:p-12">
+      <Section className="mx-auto w-full max-w-2xl space-y-8 print:space-y-4">
+        <div className="flex flex-col-reverse items-center justify-between gap-4 sm:flex-row">
+          <div className="flex-1 space-y-1.5 text-center sm:text-start">
+            <h1 className="mb-4 text-3xl font-bold">{RESUME_DATA.name}</h1>
+            <p className="max-w-md text-pretty text-muted-foreground print:text-[12px]">
               {RESUME_DATA.about}
             </p>
-            <p className="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground">
+            <p className="max-w-md items-center text-pretty text-sm text-muted-foreground">
               <a
-                className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
+                className="inline-flex items-center gap-x-1.5 align-baseline leading-none hover:underline"
                 href={RESUME_DATA.locationLink}
                 target="_blank">
                 <GlobeIcon className="size-3" />
                 {RESUME_DATA.location}
               </a>
             </p>
-            <div className="flex gap-x-1 pt-1 font-mono text-sm text-muted-foreground print:hidden">
+            <div className="flex justify-center gap-x-2 pt-1 text-sm text-muted-foreground sm:justify-start print:hidden">
               {RESUME_DATA.contact.social.map((social) => (
                 <Button
                   key={social.name}
@@ -56,32 +56,39 @@ const PortfolioPage = () => {
                   variant="outline"
                   size="icon"
                   asChild>
-                  <a href={`mailto: ${RESUME_DATA.contact.email}`}>
+                  <a href={`mailto:${RESUME_DATA.contact.email}`}>
                     <MailIcon className="size-4" />
                   </a>
                 </Button>
               )}
             </div>
-            <div className="hidden flex-col gap-x-1 font-mono text-sm text-muted-foreground print:flex print:text-[12px]">
+            <div className="hidden flex-col gap-x-1 text-sm text-muted-foreground print:flex print:text-[12px]">
               {RESUME_DATA.contact.email ? (
-                <a href={`mailto: ${RESUME_DATA.contact.email}`}>
+                <a href={`mailto:${RESUME_DATA.contact.email}`}>
                   <span className="underline">{RESUME_DATA.contact.email}</span>
                 </a>
               ) : null}
             </div>
           </div>
+
           <Avatar className="size-28">
             <AvatarImage alt={RESUME_DATA.name} src={RESUME_DATA.avatarUrl} />
             <AvatarFallback>{RESUME_DATA.initials}</AvatarFallback>
           </Avatar>
         </div>
         <Section>
+          <h2 className="text-2xl font-bold">About</h2>
+          <p className="whitespace-normal text-pretty leading-8 text-muted-foreground sm:whitespace-pre-wrap print:text-[12px]">
+            {RESUME_DATA.summary}
+          </p>
+        </Section>
+        <Section>
           <h2 className="text-2xl font-bold">Work Experience</h2>
           <div className="space-y-4">
             {RESUME_DATA.work.map((work) => (
               <Card key={work.company}>
                 <CardHeader className="mb-3">
-                  <div className="flex items-center justify-between gap-x-2 text-base">
+                  <div className="flex flex-col items-start justify-between gap-1 gap-x-2 text-base sm:flex-row sm:items-center">
                     <h3 className="inline-flex items-center justify-center gap-x-1 text-lg font-semibold leading-none">
                       <a
                         className="hover:underline"
@@ -95,11 +102,11 @@ const PortfolioPage = () => {
                     </div>
                   </div>
                 </CardHeader>
-                <CardDescription className="text-sm">
+                <CardDescription className="text-pretty text-sm">
                   {work.description}
                 </CardDescription>
 
-                <h4 className="mt-5 font-semibold  leading-none print:text-[12px]">
+                <h4 className="mt-7 font-semibold  leading-none print:text-[12px]">
                   {work.title}
                 </h4>
                 {work.points && (
@@ -121,7 +128,7 @@ const PortfolioPage = () => {
             {RESUME_DATA.education.map((education) => (
               <Card key={education.school}>
                 <CardHeader>
-                  <div className="flex items-center justify-between gap-x-2 text-base">
+                  <div className="flex flex-col items-start justify-between gap-1 gap-x-2 text-base sm:flex-row sm:items-center">
                     <h3 className="text-lg font-semibold leading-none">
                       {education.school}
                     </h3>
@@ -130,7 +137,7 @@ const PortfolioPage = () => {
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent className="mt-2 print:text-[12px]">
+                <CardContent className="mt-2 text-base print:text-[12px]">
                   {education.degree}
                 </CardContent>
               </Card>
@@ -141,13 +148,13 @@ const PortfolioPage = () => {
           <h2 className="text-2xl font-bold">Skills</h2>
           <div className="flex flex-wrap gap-1">
             {RESUME_DATA.skills.map((skill) => (
-              <Badge key={skill} className="print:text-[10px]">
+              <Badge className="print:text-[10px]" key={skill}>
                 {skill}
               </Badge>
             ))}
           </div>
         </Section>
-      </section>
+      </Section>
     </main>
   );
 };
