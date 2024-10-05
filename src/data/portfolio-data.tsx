@@ -3,7 +3,7 @@ import IconGithub from '@/components/icon/Github';
 export const RESUME_DATA = {
   name: '백준원',
   initials: '준원',
-  location: '대한민국 서울특별시',
+  location: '대한민국 대전광역시',
   locationLink: 'https://www.google.com/maps/place/daejeon',
   about: '디테일에 주의를 기울이는 프론트엔드 개발자',
   summary: '',
@@ -38,6 +38,7 @@ export const RESUME_DATA = {
       end: null,
       description:
         'Leading the development of the Film.io platform. Technologies: React, TypeScript, Node.js',
+      points: [''],
     },
   ],
   skills: ['Javascript', 'Typescript', 'React.js', 'Vue.js', 'Next.js'],
