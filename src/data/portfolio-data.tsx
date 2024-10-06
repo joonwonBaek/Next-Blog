@@ -42,6 +42,12 @@ export const RESUME_DATA = {
     },
   ],
   skills: ['Javascript', 'Typescript', 'React.js', 'Vue.js', 'Next.js'],
+  experience: [
+    { title: '', start: '', end: ' ', description: '', points: [''] },
+    { title: '', start: '', end: ' ', description: '', points: [''] },
+    { title: '', start: '', end: ' ', description: '', points: [''] },
+    { title: '', start: '', end: ' ', description: '', points: [''] },
+  ],
   projects: [
     {
       title: 'Parabol',

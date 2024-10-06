@@ -83,7 +83,7 @@ const PortfolioPage = () => {
           </p>
         </Section>
         <Section>
-          <h2 className="text-2xl font-bold">Work Experience</h2>
+          <h2 className="text-2xl font-bold">Work</h2>
           <div className="space-y-4">
             {RESUME_DATA.work.map((work) => (
               <Card key={work.company}>
