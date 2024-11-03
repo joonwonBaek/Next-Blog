@@ -1,20 +1,13 @@
-import { Badge } from '../ui/badge';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '../ui/card';
+import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
 interface Props {
   title: string;
   description: string;
-  tags: readonly string[];
+  // tags: readonly string[];
   link?: string;
 }
 
-export const ProjectCard = ({ title, description, tags, link }: Props) => {
+export const ProjectCard = ({ title, description, link }: Props) => {
   return (
     <Card className="flex flex-col overflow-hidden p-4">
       <CardHeader className="">
@@ -40,7 +33,7 @@ export const ProjectCard = ({ title, description, tags, link }: Props) => {
           </CardDescription>
         </div>
       </CardHeader>
-      <CardContent className="mt-auto flex">
+      {/* <CardContent className="mt-auto flex">
         <div>
           {tags.map((tag) => (
             <Badge
@@ -51,7 +44,7 @@ export const ProjectCard = ({ title, description, tags, link }: Props) => {
             </Badge>
           ))}
         </div>
-      </CardContent>
+      </CardContent> */}
     </Card>
   );
 };

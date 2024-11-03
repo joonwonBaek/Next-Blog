@@ -1,6 +1,7 @@
 import { GlobeIcon, MailIcon } from 'lucide-react';
 import { Metadata } from 'next';
 
+import { ProjectCard } from '@/components/common/project-card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -12,13 +13,17 @@ import {
 } from '@/components/ui/card';
 import { Section } from '@/components/ui/section';
 import { RESUME_DATA } from '@/data/portfolio-data';
+import { getSortedProjectList } from '@/lib/project';
 
 export const metadata: Metadata = {
   title: `${RESUME_DATA.name} | ${RESUME_DATA.about}`,
   description: RESUME_DATA.summary,
 };
 
-const PortfolioPage = () => {
+const PortfolioPage = async () => {
+  const projectList = await getSortedProjectList('ko');
+  console.log(projectList);
+
   return (
     <main className="container relative mx-auto scroll-my-12 overflow-auto p-6 pt-12 sm:p-9 md:p-16 print:p-12">
       <Section className="mx-auto w-full max-w-2xl space-y-8 print:space-y-4">
@@ -151,6 +156,20 @@ const PortfolioPage = () => {
               <Badge className="print:text-[10px]" key={skill}>
                 {skill}
               </Badge>
+            ))}
+          </div>
+        </Section>
+        <Section className="print-force-new-page scroll-mb-16">
+          <h2 className="text-2xl font-bold">Projects</h2>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-2">
+            {projectList.map((project) => (
+              <ProjectCard
+                key={project.title}
+                title={project.title}
+                description={project.desc}
+                // tags={project.techStack}
+                // link={'link' in project ? project.link.href : undefined}
+              />
             ))}
           </div>
         </Section>
