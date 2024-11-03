@@ -14,6 +14,7 @@ import ThemeSwitch from './theme/Switch';
 const navList = [
   { name: 'BAEK', href: '/blog' },
   { name: 'Memo', href: '/memo' },
+  { name: 'Portfolio', href: '/portfolio' },
 ];
 
 export const Header = () => {

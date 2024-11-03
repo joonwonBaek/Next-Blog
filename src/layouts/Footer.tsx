@@ -3,7 +3,7 @@ import Link from 'next/link';
 import IconGithub from '@/components/icon/Github';
 export const Footer = () => {
   return (
-    <footer className="flex flex-col items-center justify-center gap-4 pb-16 pt-20 text-center">
+    <footer className="mb-16 mt-20 flex flex-col items-center justify-center gap-4 text-center">
       <div>
         <Link href="https://github.com/joonwonBaek" target="_blank">
           <IconGithub
