@@ -6,7 +6,7 @@ import path from 'path';
 
 import { Project, ProjectMatter } from '@/config/types';
 
-const BASE_PATH = 'src\\projects';
+const BASE_PATH = '/src/projects';
 const PROJECT_PATH = path.join(process.cwd(), BASE_PATH);
 
 // 모든 mdx 파일 조회
@@ -40,7 +40,7 @@ const sortProjectList = (projectList: Project[]) => {
 export const parseProjectAbstract = (postPath: string) => {
   const path = postPath
     .slice(postPath.indexOf(BASE_PATH))
-    .replace(`${BASE_PATH}\\`, '')
+    .replace(`${BASE_PATH}/`, '')
     .replace('.mdx', '');
 
   const [slug, locale] = path.split('/');
@@ -65,7 +65,7 @@ export const getSortedProjectList = async (locale: string) => {
 
 // post 상세 페이지 내용 조회
 export const getProjectDetail = async (slug: string, locale: string) => {
-  const filePath = `${PROJECT_PATH}\\${slug}\\${locale}.mdx`;
+  const filePath = `${PROJECT_PATH}/${slug}/${locale}.mdx`;
   const detail = await parseProject(filePath, locale);
   return detail;
 };
